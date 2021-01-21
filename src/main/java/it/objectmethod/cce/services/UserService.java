@@ -1,7 +1,5 @@
 package it.objectmethod.cce.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import it.objectmethod.cce.dto.UserDTO;
@@ -18,14 +16,22 @@ public class UserService {
 
 		User user = userRep.findByEmailAndPassword(emailToCheck, passwordToCheck);
 
-		UserDTO userToResp = new UserDTO();
+		UserDTO userToResp = null;
 
-		userToResp.setEmail(user.getEmail());
-		userToResp.setIdUtente(user.getIdUtente());
-		userToResp.setName(user.getName());
-		userToResp.setRole(user.getRole());
+		if(user != null) {
+			
+			userToResp = new UserDTO();
+			userToResp.setEmail(user.getEmail());
+			userToResp.setIdUtente(user.getIdUtente());
+			userToResp.setName(user.getName());
+			userToResp.setRole(user.getRole());
 
-		return userToResp;
+			return userToResp;
+		} else {
+
+			return userToResp;
+		}
+		
 
 	}
 
