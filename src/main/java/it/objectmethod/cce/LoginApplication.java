@@ -1,10 +1,10 @@
-package it.objectmethod.loginjob;
+package it.objectmethod.cce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@EntityScan("it.objectmethod.loginjob.entities")
+@EntityScan("it.objectmethod.cce.entities")
 @SpringBootApplication
 public class LoginApplication {
 

@@ -1,18 +1,34 @@
-package it.objectmethod.loginjob.dto;
+package it.objectmethod.cce.entities;
 
-public class UserDTO {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	private int idUtente;
+@Entity
+@Table(name="utenti")
+public class User {
+
+	@Id
+	private int idutente;
+	
+	@Column(name="name")
 	private String name;
+	
+	@Column(name="role")
 	private String role;
+	
+	@Column(name="password")
 	private String password;
+	
+	@Column(name="email")
 	private String email;
 	
 	public int getIdUtente() {
-		return idUtente;
+		return idutente;
 	}
 	public void setIdUtente(int idUtente) {
-		this.idUtente = idUtente;
+		this.idutente = idUtente;
 	}
 	public String getName() {
 		return name;
