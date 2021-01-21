@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Filter implements javax.servlet.Filter {
+public class AuthenticationFilter implements javax.servlet.Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -34,10 +34,8 @@ public class Filter implements javax.servlet.Filter {
 			if ("1".equals(token)) {
 				System.out.println("token = 1");
 				allow = true;
-			} else {
-				System.out.println("token != 1");
-				allow = false;
-			}
+			} 
+			
 		} else {
 			System.out.println("percorso login");
 			allow = true;

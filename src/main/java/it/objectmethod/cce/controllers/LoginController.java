@@ -31,4 +31,11 @@ public class LoginController {
 		
 	}
 
+	@PostMapping("/dummy")
+	public ResponseEntity<String> dummy() {
+		
+		return new ResponseEntity<String>("ciao, dummy",HttpStatus.OK);
+		
+	}
+	
 }

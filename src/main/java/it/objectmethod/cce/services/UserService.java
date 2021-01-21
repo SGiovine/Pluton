@@ -18,20 +18,17 @@ public class UserService {
 
 		UserDTO userToResp = null;
 
-		if(user != null) {
-			
+		if (user != null) {
+
 			userToResp = new UserDTO();
 			userToResp.setEmail(user.getEmail());
 			userToResp.setIdUtente(user.getIdUtente());
 			userToResp.setName(user.getName());
 			userToResp.setRole(user.getRole());
 
-			return userToResp;
-		} else {
-
-			return userToResp;
 		}
-		
+
+		return userToResp;
 
 	}
 
