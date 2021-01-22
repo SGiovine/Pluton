@@ -16,19 +16,17 @@ public class UserService {
 
 		User user = userRep.findByEmailAndPassword(emailToCheck, passwordToCheck);
 
-		UserDTO userToResp = null;
+		UserDTO userDTO = null;
 
 		if (user != null) {
-
-			userToResp = new UserDTO();
-			userToResp.setEmail(user.getEmail());
-			userToResp.setIdUtente(user.getIdUtente());
-			userToResp.setName(user.getName());
-			userToResp.setRole(user.getRole());
-
+			userDTO = new UserDTO();
+			userDTO.setEmail(user.getEmail());
+			userDTO.setIdUtente(user.getIdUtente());
+			userDTO.setName(user.getName());
+			userDTO.setRole(user.getRole());
 		}
 
-		return userToResp;
+		return userDTO;
 
 	}
 
