@@ -24,7 +24,6 @@ public class TokensService {
 	@Autowired
 	UserRepository userRep;
 
-
 	final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
 	public String generateToken(String user) {
@@ -36,32 +35,16 @@ public class TokensService {
 				.signWith(SECRET_KEY).compact();
 	}
 
-	private String decodeToken(String token) {
-
-		Claims claims = Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody();
-
-	/*	long instantNow = Date.from(ZonedDateTime.now().toInstant()).getTime();
-
-		String userDTOtimeValid = "";
-
-		if (instantNow < claims.getExpiration().getTime()) {
-			userDTOtimeValid = claims.getSubject();
-		}
-
-		return userDTOtimeValid;*/
-		return claims.getSubject();
-	}
-
 	public boolean tokenValidator(String token) {
 
+		Claims claims = Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody();
+		String tokenUserDTO = claims.getSubject();
+
 		Gson gson = new Gson();
-		String tokenUserDTO = decodeToken(token);
 		UserDTO userDTOparsed = gson.fromJson(tokenUserDTO, UserDTO.class);
-
 		gson = null;
-		boolean userAuthentication = false;
-		User user = userRep.findByIdutente(userDTOparsed.getIdUtente());
 
+		User user = userRep.findByIdutente(userDTOparsed.getIdUtente());
 		UserDTO userDTO = null;
 
 		if (user != null) {
@@ -71,13 +54,15 @@ public class TokensService {
 			userDTO.setName(user.getName());
 			userDTO.setRole(user.getRole());
 		}
-		System.out.println("tokenservices,tokenvalidator,tokenparsedtoobject equals repositoryuser: "+userDTOparsed.equals(userDTO));
 
+		System.out.println("tokenservices,tokenvalidator,tokenparsedtoobject equals repositoryuser: "
+				+ userDTOparsed.equals(userDTO));
+
+		boolean userAuthentication = false;
 		if (userDTO.equals(userDTOparsed)) {
 			userAuthentication = true;
 			System.out.println("tokenservices,tokenvalidator,userAuthentication: " + userAuthentication);
 		}
-
 		return userAuthentication;
 	}
 
