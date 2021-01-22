@@ -2,25 +2,16 @@ package it.objectmethod.cce.dto;
 
 public class UserDTO {
 
-	private int idUtente;
+	private Integer idUtente;
 	private String name;
 	private String role;
 	private String email;
 
-	public boolean equals(UserDTO userdto) {
-		boolean bool = false;
-		
-		if(userdto.getEmail().equals(this.getEmail())&&userdto.getIdUtente()==this.getIdUtente()&&userdto.getRole().equals(this.getRole())&&userdto.getName().equals(this.getName())) {
-			bool = true;
-		}
-		return bool;
-	}
-
-	public int getIdUtente() {
+	public Integer getIdUtente() {
 		return idUtente;
 	}
 
-	public void setIdUtente(int idUtente) {
+	public void setIdUtente(Integer idUtente) {
 		this.idUtente = idUtente;
 	}
 

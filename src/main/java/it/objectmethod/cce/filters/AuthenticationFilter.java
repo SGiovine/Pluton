@@ -9,15 +9,20 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import it.objectmethod.cce.controllers.LoginController;
 import it.objectmethod.cce.services.TokensService;
 
 @Component
 public class AuthenticationFilter implements javax.servlet.Filter {
 
+	private static final Logger logger = LogManager.getLogger(LoginController.class);
+	
 	@Autowired
 	TokensService tokenServ;
 	
@@ -33,22 +38,22 @@ public class AuthenticationFilter implements javax.servlet.Filter {
 		String url = req.getRequestURI();
 		boolean allow = false;
 
-		System.out.println("authenticationfilter, dofilter, uri: "+url);
+		logger.info("authenticationfilter, dofilter, uri: "+url);
 		
 		if (!url.equals("/login")) {
 
-			System.out.println("authenticationfilter, dofilter, token: "+token);
+			logger.info("authenticationfilter, dofilter, token: "+token);
 			
 			boolean tokenValidity = tokenServ.tokenValidator(token);
 			
 			if (tokenValidity) {
 				allow = true;
-				System.out.println("authenticationfilter, dofilter, allow: "+allow);
+				logger.info("authenticationfilter, dofilter, allow: "+allow);
 			} 
 			
 		} else {
 			allow = true;
-			System.out.println("authenticationfilter, dofilter, allow: "+allow);
+			logger.info("authenticationfilter, dofilter, allow: "+allow);
 		}
 		
 		if (allow) {
